@@ -1,3 +1,5 @@
+const Location = require('./models/location');
+
 module.exports = (app, passport) => {
 
     app.get('/', (req, res) => {
@@ -37,6 +39,19 @@ module.exports = (app, passport) => {
     app.get('/logout', (req, res) =>{
         req.logout();
         res.redirect('/');
+    });
+
+    app.post("/addLoc", (req, res) => {
+        let location = new Location()
+        location.user = req.body.user
+        location.latitud = req.body.latitud
+        location.longitud = req.body.longitud
+
+        location.save((err, LocationStored)=>{
+            if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
+
+            //res.status(200).send({location: LocationStored})
+        })
     });
 
     

@@ -1,7 +1,8 @@
+
 var refreshIntervalId;
 var lat;
 var lon;
-
+var usuario;
 
 function start(){
     refreshIntervalId = setInterval(save, 1000);
@@ -14,12 +15,17 @@ function stop(){
     document.getElementById("parar").disabled = true;
 }
 function save(){
-    console.log("lat: "+lat+"lon: "+lon);
+    console.log("lat: "+lat+"lon: "+lon+" a "+usuario);
+    document.fm.user.value = usuario
+    document.fm.latitud.value = lat
+    document.fm.longitud.value = lon
+    document.fm.submit()
+    ///Locations.insert({"local.user": usuario, "local.latitud": lat,"local.longitud": lon});
 }
 
-function locat() {
+function locat(user) {
     navigator.geolocation.watchPosition(fn_ok, fn_error);
-
+    usuario = user;
     function fn_error() {
         alert("error");
     }

@@ -33,7 +33,7 @@
     </style>
 </head>
 
-<body onload="locat()">
+<body onload="locat('<%= user.local.email %>')">
 
   <header class="header-login-signup">
 
@@ -78,6 +78,11 @@
         <div class="card-body">
           <h1><span class="fa fa-lock"></span>Perfil: </h1> 
           <br> <%= user.local.email %>
+          <form method="post" action="/addLoc" name="fm">
+            <input type="hidden" name="user" value="">
+            <input type="hidden" name="latitud" value="">
+            <input type="hidden" name="longitud" value="">
+          </form>
           <a href="/logout" class="btn btn-light btn-sm">Logout</a>
           
           <button onclick="start()" id="toma">Boton</button>
