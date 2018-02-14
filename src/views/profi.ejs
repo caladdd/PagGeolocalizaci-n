@@ -5,7 +5,11 @@
   <title>Perfil</title>
   <meta charset="utf-8">
   <% include partials/head %>
-  <script type="text/javascript" src="./javascript/coordenadas.js"></script>
+  <script type="text/javascript" src="./javascript/coordenadas.js"></script> 
+  <script type="text/javascript" src="./javascript/mapa.js"></script> 
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfBVVbGOCH4LvxBQKFkryaAyb_dYnI4Ck&callback=initMap">
+  </script>
     <style>
       /* unvisited link */
 
@@ -29,6 +33,11 @@
 
       a:active {
         color: rgb(255, 94, 0);
+      }
+
+      #map{
+        height: 500px;
+        width: 100%;
       }
     </style>
 </head>
@@ -89,6 +98,8 @@
           <button onclick="stop()" id="parar" disabled>arar</button>
         </div>
         <hr>
+        <div id="map" class="map"></div>
+        <button onclick="initMap()">Boton</button>
       </div>
     </div>
   </div>
