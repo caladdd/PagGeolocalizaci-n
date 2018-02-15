@@ -1,3 +1,3 @@
 module.exports = {
-    'url' : 'mongodb://localhost:27017/login-node'
+    'url' : process.env.MONGODB || 'mongodb://localhost:27017/login-node'
 };
