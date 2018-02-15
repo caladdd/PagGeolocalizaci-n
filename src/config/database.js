@@ -1,3 +1,3 @@
 module.exports = {
-    'url' : process.env.MONGODB || 'mongodb://localhost:27017/login-node'
+    'url' : 'mongodb://admin:admin@ds235768.mlab.com:35768/heroku_c7r4qmcj'
 };
