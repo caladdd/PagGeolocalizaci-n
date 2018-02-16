@@ -54,6 +54,15 @@ module.exports = (app, passport) => {
         })
     });
 
+    /*app.get("/addLoc", isLoggedIn, (req, res) => {
+        let user = req.user.local.email
+        Location.find().where('user').equals(user).exec(consulta);
+        function consulta(err,location){
+            if(err) console.log(err)
+            else res.render('profile',{location: location},{user: user}
+            )}
+    });*/
+
     
 };
 

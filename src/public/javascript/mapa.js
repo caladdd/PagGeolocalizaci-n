@@ -9,11 +9,13 @@ function initMap(){
     google.maps.Map(document.getElementById('map'), options);
 }
 
-function addMaker(props){
+function addMaker(a,b){
+    alert("hola)
+    var coor = new google.maps.LatLng(a,b)
     var marker = new google.maps.Maker({
-        position:props.coords,
-        map:map,
+        position: coor
     })
+    marker.setMap(map)
 }
 
 
