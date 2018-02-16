@@ -124,6 +124,5 @@ debe cambiar el string de conexión a la base de datos en producción en config.
 * ya tiene una cuenta en heroku
 * se sincroniza automaticamente con GitHub
 
-/////
 
-@20172            
+@20181          
