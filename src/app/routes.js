@@ -50,7 +50,7 @@ module.exports = (app, passport) => {
         location.save((err, LocationStored)=>{
             if(err) res.status(500).send({message: `Error al salvar en la base de datos: ${err}`})
 
-            //res.status(200).send({location: LocationStored})
+            res.status(200).send({location: LocationStored})
         })
     });
 
