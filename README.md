@@ -53,31 +53,40 @@ location:
 
 ## 3.2 Servicios Web
 
-/* Servicio Web: Crear cuenta de autentificación.
-  Método: GET
-  URI: /newarticle
-*/
+    1. http://server/singup
 
-/* Servicio Web: autentificación de usuario.
-  Método: GET
-  URI: /findbytitle?title=val
-*/
+    Método: GET
 
-/* Servicio Web: Guardar localización actual del dispositivo.
-  Método: POST
-  URI: /articles
-*/
+    Descripción:  Crear cuenta de autentificación.
 
-/* Servicio Web: Mostrar ubicación en mapa.
-  Método: GET
-  URI: /delarticle?id=val
- */
+    2. http://server/login
 
- /* Servicio Web: Borra un Articulo de la Base de datos.
-   Método: DELETE
-   URI: /delarticle/id
-  */
+    Método: GET
 
+    Descripción:  Autentificación de usuario.
+
+    3. http://server/AddLoc
+
+    Método: POST
+
+    Descripción:  Guardar localización actual del dispositivo.
+
+    Datos de entrada:
+
+      user, latitud, longitud, timestamp
+
+    Datos de salida:
+
+      Copia en JSON guardado en la base de datos.
+      ej: [{"user":"juanpablo.calad@hotmail.com","latitud":6.217,"longitud":-75.567 "timestamp":"2018-02-15T18:03:00.000Z"]
+
+    4. http://server/singup
+
+    Método: GET
+
+    Descripción:  Mostrar ubicación en mapa.
+
+ 
 
 
 
