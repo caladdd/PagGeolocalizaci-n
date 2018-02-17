@@ -10,10 +10,8 @@ Aplicación web que permite ver mi locación brindada desde un dispositivo móvi
 
 ## 1.1 Requisitos funcionales:
 
-1. Crear Articulo.
-2. Buscar articulo por parte del titulo
-3. Borrar articulo por Id de articulo
-4. Listar todos los artículos de la base de datos en la página home o índex
+1. Guardar mi posición actual
+2. Consultar y plotear en un mapa mi posición
 
 ## 1.2 Definición de tecnología de desarrollo y despliegue para la aplicación:
 
@@ -26,7 +24,7 @@ Aplicación web que permite ver mi locación brindada desde un dispositivo móvi
 
 # 2. Desarrollo
 
-se desarrolló todo desde cero, diseñando la estructura de modelos, controles y vistas.
+Se desarrolló todo desde cero, diseñando la estructura de modelos, controles y vistas.
 
 # 3. Diseño:
 
@@ -86,8 +84,84 @@ location:
 
     Descripción:  Mostrar ubicación en mapa.
 
- 
+# 4. Despligue en un Servidor Centos 7.x en el DCA
 
+
+## se instala nvm local para el usuario
+
+
+## se instala el servidor mongodb
+
+como root:
+
+      user1$ sudo yum install mongodb-server -y
+
+ponerlo a correr:
+
+      user1$ sudo systemctl enable mongod
+      user1$ sudo systemctl start mongod
+
+
+## se instala NGINX
+
+      user1$ sudo yum install nginx
+      user1$ sudo systemctl enable nginx
+      user1$ sudo systemctl start nginx
+
+Abrir el puerto 80 y 3000
+
+      user1$ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
+      user1$ sudo firewall-cmd --zone=public --add-port=3000/tcp --permanent
+      user1$ sudo firewall-cmd --reload
+      user1$ sudo firewall-cmd --list-all
+
+
+## se instala Apache Web Server
+
+      user1$ sudo yum install httpd
+
+## se instala un manejador de procesos de nodejs, se instala: PM2 (http://pm2.keymetrics.io/)
+
+      user1$ npm install -g pm2
+      user1$ cd src
+      user1$ pm2 start server.ps
+      user1$ pm2 list
+
+ponerlo como un servicio, para cuando baje y suba el sistema:    
+
+      user1$ sudo pm2 startup systemd
+
+## MUY MUY IMPORTANTE: Deshabilitar SELINUX
+
+          user1$ sudo vim /etc/sysconfig/selinux
+
+                SELINUX=disabled
+
+          user1$ sudo reboot      
+
+
+### Configuración del proxy inverso en NGINX para cada aplicación:
+
+      // /etc/nginx/nginx.config
+      .
+      .
+      server {
+        listen       80 default_server;
+        listen       [::]:80 default_server;
+        server_name  _;
+        root         /usr/share/nginx/html;
+      .
+      .
+      location / {
+          proxy_pass http://localhost:3000;
+          proxy_http_version 2
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+      }
+      .
+      .
 
 
 # 5. Despliege en Heroku
@@ -100,7 +174,7 @@ location:
 
 primero es crear una base de datos, usuario y clave en un proveedor de Mongo como mlab.com
 
-ofrece un plan gratis con limitaciones, pero para efectos de esta prueba va bien.
+ofrece un plan gratis con limitaciones.
 
 en este caso, se creo una base de datos: "geolo", user: "admin", password: "*****".
 
